@@ -1,0 +1,26 @@
+@startuml
+
+() "Entities"
+() "EntityService"
+() "EntityView"
+
+package "Domain Layer" {
+[1...* Model] - Entities
+}
+
+package "Service Layer" {
+Entities - [Controller]
+EntityService - [Controller]
+}
+
+package "View Layer" {
+Entities - [Views]
+EntityView - [Views]
+}
+
+legend right
+  Fragen: 
+  EntityManager
+endlegend
+
+@enduml
