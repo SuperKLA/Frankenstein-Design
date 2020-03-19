@@ -250,8 +250,8 @@ A mini game consisting of a GameArena and a Character, these are also our models
 *Assets/ExampleGame/Controls/Models/Character.cs*
 
 * IGameData returns the GameConfig.
-* ICharacterFigure the figure itself.
-* ICharacterFigureMovement only movement, one could also make it more abstract and just call it movement. Then everyone who wants to move could use it.
+* ICharacterFigure is the figure itself.
+* ICharacterFigureMovement is only movement, you could also make it more abstract and just call it movement. Then everyone who wants to move could use it.
 * Entities can define dependencies on each other, see ICharacterFigureMovement.
 
 ```c#
@@ -476,8 +476,8 @@ namespace ExampleGame
 }
 ```
 
-
 You have only seen the models and you already know how they are built, without knowing the exact function in detail
+
 
 # How does Frankenstein solve the problems mentioned above?
 
