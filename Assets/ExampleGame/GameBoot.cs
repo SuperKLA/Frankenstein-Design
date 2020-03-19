@@ -13,6 +13,10 @@ namespace ExampleGame
 
         void IAPIBoot.Boot(IoCContainer container)
         {
+            // That's how entities are linked with controller
+            // you could also use different controller per platform
+            container.Register<IExampleEntityService>(() => new ExampleEntityController());
+            
             container.Register<IGameArenaService>(() => new GameArenaController());
             container.Register<IGameArenaGUIService>(() => new GameArenaGUIController());
             
