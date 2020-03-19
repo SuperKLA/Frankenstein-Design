@@ -15,17 +15,14 @@ then Frankenstein is something for you.
 ## S.O.L.I.D.
 Frankenstein is a software design for Unity and is strictly based on S.O.L.I.D. It can be used for small and large projects and is lightweight at the same time.
 
-## MVC
+## MVC - Model View Controller
 Everything is built according to MVC, keep that in mind when you look at the example project.
 
 
 # General structure and vocabulary
 
 ## Entities
-The MVC is joined by entities. They make the whole system very flexible. This is what it looks like.
-
-### Benefits
-* The entity layer only serves to describe individual features. An entity always has its own very specific task.  If something is changed here, it has to be adapted everywhere in the project, in this case it is something good.  I see what effects it has on the system and if all models support the change.
+The MVC is joined by entities. They make the whole system very flexible. This is what one entity looks like.
 
 ```c#
 using Frankenstein;
@@ -66,14 +63,12 @@ namespace ExampleGame.Entities
     }
 }
 ```
+### Benefits
+* The entity layer only serves to describe individual features. An entity always has its own very specific task. If something is changed here, it has to be adapted everywhere in the project, in this case it is something good. That's how you see what effects it has on the system and if all models support the change.
 
 
 ## Controller
 Controllers implement entities.
-
-### Benefits
-* The controller layer only implements the entity. The controller does not care where data comes from. In the controller you can completely forget the surrounding program/project, everything the controller needs is defined by the entity.
-* Controllers are excellent testable, because they only have reference to their entity and are cut off from the rest of the system.
 
 ```c#
 using System.Threading.Tasks;
@@ -127,17 +122,14 @@ namespace ExampleGame.Controller
 }
 ```
 
+### Benefits
+* The controller layer only implements the entity. The controller does not care where data comes from. In the controller you can completely forget the surrounding program/project, everything the controller needs is defined by the entity.
+* Controllers are excellent testable, because they only have reference to their own entity and are cut off from the rest of the system.
+
 
 ## Models / Domain
 Models fulfill entities and connect them with each other. Only this layer knows what your project/game is doing.
 *This is a very simplified example.*
-
-### Benefits
-* Everything that makes up a model is determined by its entities, so you can see directly what the model does. It can get more capability at any time without hurting others.
-* Interface Accessors make it easier to read data flow.
-* A model can include any entity, it just needs to make sure its conditions/implementation is correct, then it gets this function. Yes, a Super Object that has all function is conceivable.
-* Async and await are included, so asynchronous loading is much easier. See Unity.Addressables
-
 
 ```c#
 using System.Threading.Tasks;
@@ -200,14 +192,15 @@ namespace ExampleGame
     }
 }
 ```
+### Benefits
+* Everything that makes up a model is determined by its entities, so you can see directly what the model does. It can get more entities at any time without hurting others.
+* Interface Accessors make it easier to read data flow.
+* A model can include any entity, it just needs to make sure its conditions/implementation is correct, then it gets this function. Yes, a Super Object that has all function is conceivable.
+* Async and await are included, so asynchronous loading is much easier. See Unity.Addressables
 
 
 ## The glue that holds everything together
 IoC Container
-
-### Benefits
-* Controllers can be defined as singleton and allow data exchange between models via entities.
-* Depending on the target platform a different controller can be returned.
 
 ```c#
 using ExampleGame.Controller;
@@ -240,6 +233,10 @@ namespace ExampleGame
     }
 }
 ```
+### Benefits
+* Controllers can be defined as singleton and allow data exchange between models via entities.
+* Depending on the target platform a different controller can be returned.
+
 
 ## Congratulations you now know the basics of Frankenstein Design.
 But there is more hidden in the details.
@@ -497,7 +494,7 @@ You have only seen the models and you already know how they are built, without k
 
   
 * *how can I better control changes and effects in my code?*
-    * The way entities are structured, they always represent only one descriptive layer.  All your changes will be more predictable. 
+    * The way entities are structured, they always represent only one descriptive layer. All your changes will be more predictable. 
     * All interface implementations are explicit, so any change must go through the whole project and is not lost.
 
   
