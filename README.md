@@ -1,5 +1,6 @@
 # Frankenstein-Design
-Welcome to the Frankenstein Design
+Welcome to the Frankenstein Design for Unity. A MVC software design to create games and more.
+
 
 ## What's this all about?
 
@@ -16,6 +17,7 @@ Frankenstein is a software design for Unity and is strictly based on S.O.L.I.D. 
 
 ## MVC
 Everything is built according to MVC, keep that in mind when you look at the example project.
+
 
 # General structure and vocabulary
 
@@ -64,6 +66,7 @@ namespace ExampleGame.Entities
     }
 }
 ```
+
 
 ## Controller
 Controllers implement entities.
@@ -124,13 +127,14 @@ namespace ExampleGame.Controller
 }
 ```
 
+
 ## Models / Domain
 Models fulfill entities and connect them with each other. Only this layer knows what your project/game is doing.
 *This is a very simplified example.*
 
 ### Benefits
 * Everything that makes up a model is determined by its entities, so you can see directly what the model does. It can get more capability at any time without hurting others.
-* Interface Accessors make it easier to read data flow
+* Interface Accessors make it easier to read data flow.
 * A model can include any entity, it just needs to make sure its conditions/implementation is correct, then it gets this function. Yes, a Super Object that has all function is conceivable.
 * Async and await are included, so asynchronous loading is much easier. See Unity.Addressables
 
@@ -197,6 +201,7 @@ namespace ExampleGame
 }
 ```
 
+
 ## The glue that holds everything together
 IoC Container
 
@@ -238,3 +243,266 @@ namespace ExampleGame
 
 ## Congratulations you now know the basics of Frankenstein Design.
 But there is more hidden in the details.
+
+# Let's look at a real example
+A mini game consisting of a GameArena and a Character, these are also our models.
+*Assets/ExampleGame/Controls*
+
+
+## The Character
+*Assets/ExampleGame/Controls/Models/Character.cs*
+
+* IGameData returns the GameConfig.
+* ICharacterFigure the figure itself.
+* ICharacterFigureMovement only movement, one could also make it more abstract and just call it movement. Then everyone who wants to move could use it.
+* Entities can define dependencies on each other, see ICharacterFigureMovement.
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ExampleGame.Entities;
+using Frankenstein;
+using Frankenstein.Controls.Entities;
+using UnityEngine;
+
+namespace ExampleGame
+{
+    public class Character : APIModel, IQueryable, ICharacterFigure, IGameData, ICharacterFigureMovement
+    {
+        #region Interface Accessors
+
+        private IQueryable               IQueryable               => this;
+        private ICharacterFigure         ICharacterFigure         => this;
+        private IGameData                IGameData                => this;
+        private ICharacterFigureMovement ICharacterFigureMovement => this;
+
+        #endregion
+
+
+        #region Locals
+        // You can share variables
+        public IGameDataService GameDataService => this.IGameData.Service;
+
+        #endregion
+
+
+        #region APIModel
+
+        public override async Task Boot(params object[] any)
+        {
+            this.IQueryable.Service               = await this.SetupServices<IQueryableService>();
+            this.IGameData.Service                = await this.SetupServices<IGameDataService>();
+            this.ICharacterFigure.Service         = await this.SetupServices<ICharacterFigureService>();
+            this.ICharacterFigureMovement.Service = await this.SetupServices<ICharacterFigureMovementService>();
+        }
+
+        public override async Task Destroy()
+        {
+            await this.DestroyServices(this.IQueryable.Service);
+            await this.DestroyServices(this.IGameData.Service);
+            await this.DestroyServices(this.ICharacterFigure.Service);
+            await this.DestroyServices(this.ICharacterFigureMovement.Service);
+            await base.Destroy();
+        }
+
+        #endregion
+
+
+        #region IQueryable
+
+        IQueryableService IAPIEntity<IQueryableService>.Service { get; set; }
+
+        List<Guid> IQueryable.Layers => new List<Guid>() { };
+
+        bool IQueryable.Matches<TQuery>()
+        {
+            return typeof(TQuery).IsInstanceOfType(this);
+        }
+
+        TService IQueryable.Provide<TService>()
+        {
+//            if (typeof(TService) == typeof(ICrewPoolQueryResult))
+//                return (TService) this.ICrewPool.Service;
+//            else
+            return default(TService);
+        }
+
+        #endregion
+
+
+        #region ICharacterFigure
+
+        ICharacterFigureService IAPIEntity<ICharacterFigureService, ICharacterFigureView>.Service { get; set; }
+
+        ICharacterFigureView IAPIEntity<ICharacterFigureService, ICharacterFigureView>.View { get; set; }
+
+        #endregion
+
+
+        #region IGameData
+
+        IGameDataService IAPIEntity<IGameDataService>.Service { get; set; }
+
+        #endregion
+
+
+        #region ICharacterFigureMovement
+
+        ICharacterFigureMovementService IAPIEntity<ICharacterFigureMovementService>.Service { get; set; }
+
+        ICharacterFigureService ICharacterFigureMovement.FigureService => this.ICharacterFigure.Service;
+
+        #endregion
+    }
+}
+```
+
+
+## The GameArena
+This is the main playing field.
+*Assets/ExampleGame/Controls/Models/GameArena.cs*
+
+* IScene loads the corresponding scene.
+* Here the order is critical for both Boot and Destroy.
+* The model also implements an entity related to the GUI.
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ExampleGame.Entities;
+using Frankenstein;
+using Frankenstein.Controls.Entities;
+
+namespace ExampleGame
+{
+    public class GameArena : APIModel, IQueryable, IScene, IGameArena, IGameArenaGUI
+    {
+        #region Interface Accessors
+
+        private IQueryable    IQueryable    => this;
+        private IScene        IScene        => this;
+        private IGameArena    IGameArena    => this;
+        private IGameArenaGUI IGameArenaGUI => this;
+
+        #endregion
+
+
+        #region Locals
+
+        public ISceneService SceneService => this.IScene.Service;
+        
+        #endregion
+
+
+        #region APIModel
+
+        public override async Task Boot(params object[] any)
+        {
+            this.IQueryable.Service = await this.SetupServices<IQueryableService>();
+            this.IScene.Service     = await this.SetupServices<ISceneService>();
+
+            await this.IScene.Service.LoadScene("ExampleGame1");
+            this.IScene.Service.SetAsMain();
+
+            this.IGameArena.Service    = await this.SetupServices<IGameArenaService>();
+            this.IGameArenaGUI.Service = await this.SetupServices<IGameArenaGUIService>();
+
+            // For the sake of simplicity no ObjectPool is used here
+            await new Character().Boot();
+        }
+
+        public override async Task Destroy()
+        {
+            await this.DestroyServices(this.IQueryable.Service);
+            await this.DestroyServices(this.IGameArena.Service);
+            await this.DestroyServices(this.IGameArenaGUI.Service);
+            await this.DestroyServices(this.IScene.Service);
+            await base.Destroy();
+        }
+
+        #endregion
+
+
+        #region IQueryable
+
+        IQueryableService IAPIEntity<IQueryableService>.Service { get; set; }
+
+        List<Guid> IQueryable.Layers => new List<Guid>() { };
+
+        bool IQueryable.Matches<TQuery>()
+        {
+            return typeof(TQuery).IsInstanceOfType(this);
+        }
+
+        TService IQueryable.Provide<TService>()
+        {
+//            if (typeof(TService) == typeof(ICrewPoolQueryResult))
+//                return (TService) this.ICrewPool.Service;
+//            else
+            return default(TService);
+        }
+
+        #endregion
+
+
+        #region IScene
+
+        ISceneService IAPIEntity<ISceneService>.Service { get; set; }
+
+        #endregion
+
+
+        #region IGameArena
+
+        IGameArenaService IAPIEntity<IGameArenaService, IGameArenaView>.Service { get; set; }
+
+        IGameArenaView IAPIEntity<IGameArenaService, IGameArenaView>.View { get; set; }
+
+        void IGameArena.OnWin()
+        {
+            this.IGameArenaGUI.Service.ShowWinScreen();
+        }
+
+        #endregion
+
+
+        #region IGameArenaGUI
+
+        IGameArenaGUIService IAPIEntity<IGameArenaGUIService, IGameArenaGUIView>.Service { get; set; }
+
+        IGameArenaGUIView IAPIEntity<IGameArenaGUIService, IGameArenaGUIView>.View { get; set; }
+        
+        #endregion
+    }
+}
+```
+
+
+You have only seen the models and you already know how they are built, without knowing the exact function in detail
+
+# How does Frankenstein solve the problems mentioned above?
+
+* *how can I create a general solution for all my projects?*
+  * Although Frankenstein and this example project is a Unity project, it is not mandatory to use Unity. Once you understand it, it can be implemented in any programming language. 
+  * Since each function / entity stands alone as a small unit, it doesn't matter in which project it is used, whether it is an FPS game or something else.
+  * You can decide for yourself what level of abstraction you want to give the entity and thus how general it is in relation to all your projects.
+  
+* *how can I write maintainable, clean and extensible code?*
+  * Models get more functionality by adding entities or by extending them. 
+  * Models have very little own code.
+  * There are no hard references. Models don't know each other. Only a controller knows one entity. Entities can offer each other their services. The layers are clearly separated.
+  * Since each entity stands alone, there are fewer cross connections and less spaghetti code.
+
+  
+* *how can I better control changes and effects in my code?*
+    * The way entities are structured, they always represent only one descriptive layer.  All your changes will be more predictable. 
+    * All interface implementations are explicit, so any change must go through the whole project and is not lost.
+
+  
+# Q&A
+* How can I notify other models or move data between them?
+Look at the IQueryable Entity. Each one that implements it is collected by it in a list and made available for searching. Here the singleton pattern is used to interact with all models. Later I will discuss such entities in detail.
+* I want to see more examples.
+Look at Frankenstein.Controls *Assets/Frankenstein-Controls/Framework*
