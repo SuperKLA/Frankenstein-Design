@@ -253,6 +253,7 @@ A mini game consisting of a GameArena and a Character, these are also our models
 * ICharacterFigure is the figure itself.
 * ICharacterFigureMovement is only movement, you could also make it more abstract and just call it movement. Then everyone who wants to move could use it.
 * Entities can define dependencies on each other, see ICharacterFigureMovement.
+* Program flow and control is created when the model links the entity with each other and when the entity passes signals to the model. See *Assets/ExampleGame/Controls/Controller/CharacterFigureMovementController.cs*
 
 ```c#
 using System;
