@@ -69,6 +69,10 @@
      <Compile Include="Assets\ExampleGame\Controls\Controller\CharacterFigureController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Controller\CharacterFigureMovementController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Entities\IGameArena.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Entities\IExampleEntity.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Models\ExampleEntityModel.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Controller\ExampleEntityController.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Views\ExampleEntityView.cs" />
      <None Include="Assets\ExampleGame\ExampleGame.asmdef" />
  <Reference Include="Unity.Addressables">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
