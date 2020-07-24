@@ -44,10 +44,10 @@ namespace ExampleGame
 
         public override async Task Destroy()
         {
-            await this.DestroyServices(this.IScene.Service);
             await this.DestroyServices(this.IQueryable.Service);
             await this.DestroyServices(this.IGameArena.Service);
             await this.DestroyServices(this.IGameArenaGUI.Service);
+            await this.DestroyServices(this.IScene.Service);
             await base.Destroy();
         }
 
