@@ -286,6 +286,15 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Burst.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.burst@1.3.0-preview.12/Unity.Burst.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.CompilerServices.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.collections@0.9.0-preview.6/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0-preview/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
@@ -642,6 +651,10 @@
     <ProjectReference Include="Frankenstein.csproj">
       <Project>{3622ea7e-09f8-c1aa-e6a1-15082f8ca20b}</Project>
       <Name>Frankenstein</Name>
+    </ProjectReference>
+    <ProjectReference Include="Frankenstein.DTO.csproj">
+      <Project>{b2dbf719-36a0-c166-6807-b6d7e62c5763}</Project>
+      <Name>Frankenstein.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="Frankenstein.Controls.csproj">
       <Project>{136cf98a-07e1-4c3a-4e95-80adfacbcdde}</Project>

@@ -50,26 +50,25 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Frankenstein\DTO\DTOConfig.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableRange.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\Awaiters.cs" />
+     <Compile Include="Assets\Frankenstein\Attributes\EasyButton.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\Internal\AsyncCoroutineRunner.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\Interfaces\IRandomSelectorBuilder.cs" />
      <Compile Include="Assets\Frankenstein\Utils\PriorityQueue.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SafeInt.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\StaticRandomSelectorBinary.cs" />
      <Compile Include="Assets\Frankenstein\APIContext.cs" />
      <Compile Include="Assets\Frankenstein\IAPIBoot.cs" />
      <Compile Include="Assets\Frankenstein\IAPIModel.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\WaitForBackgroundThread.cs" />
+     <Compile Include="Assets\Frankenstein\Groups.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\Internal\SyncContextUtil.cs" />
+     <Compile Include="Assets\Frankenstein\Attributes\MinMax.cs" />
      <Compile Include="Assets\Frankenstein\IoCContainer.cs" />
      <Compile Include="Assets\Frankenstein\Diagnostics\Debug.cs" />
      <Compile Include="Assets\Frankenstein\FrankensteinConstants.cs" />
      <Compile Include="Assets\Frankenstein\IAsyncOperationExtensions.cs" />
      <Compile Include="Assets\Frankenstein\Utils\FrameRateLock.cs" />
      <Compile Include="Assets\Frankenstein\FrankensteinQueryLayer.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableQuaterion.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\RandomSelectorTests.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\RandomMath.cs" />
      <Compile Include="Assets\Frankenstein\Diagnostics\APIDebugConsole.cs" />
@@ -79,27 +78,25 @@
      <Compile Include="Assets\Frankenstein\Diagnostics\DrawBounds.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\WaitForUpdate.cs" />
      <Compile Include="Assets\Frankenstein\Utils\GeneralUtils.cs" />
+     <Compile Include="Assets\Frankenstein\DOTS_Utils.cs" />
      <Compile Include="Assets\Frankenstein\APISetup.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\AwaitExtensions.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\DynamicRandomSelector.cs" />
      <Compile Include="Assets\Frankenstein\GameBootable.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableDatetime.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableVersion.cs" />
      <Compile Include="Assets\Frankenstein\IAPIEntity.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableGuid.cs" />
      <Compile Include="Assets\Frankenstein\APIViewBehaviour.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RefContainer.cs" />
      <Compile Include="Assets\Frankenstein\Math3d.cs" />
+     <Compile Include="Assets\Frankenstein\ResourceSelectableAttribute.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\Interfaces\IRandomSelector.cs" />
      <Compile Include="Assets\Frankenstein\Utils\FileWriter.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableVector2.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\SerializableVector3.cs" />
      <Compile Include="Assets\Frankenstein\IAPIController.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\IEnumeratorAwaitExtensions.cs" />
      <Compile Include="Assets\Frankenstein\AsyncAwaitUtil\TaskExtensions.cs" />
+     <Compile Include="Assets\Frankenstein\PlayerPrefsKill.cs" />
      <Compile Include="Assets\Frankenstein\Utils\RandomWeights\StaticRandomSelectorBuilder.cs" />
-     <Compile Include="Assets\Frankenstein\DTO\DTOObject.cs" />
      <Compile Include="Assets\Frankenstein\Attributes\ReadOnlyFieldAttribute.cs" />
+     <Compile Include="Assets\Frankenstein\APIComponentSystem.cs" />
      <Compile Include="Assets\Frankenstein\Utils\FPSDisplay.cs" />
      <Compile Include="Assets\Frankenstein\Utils\Container.cs" />
      <None Include="Assets\Frankenstein\Frankenstein.asmdef" />
@@ -108,6 +105,21 @@
  </Reference>
  <Reference Include="Unity.ResourceManager">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Entities">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Physics">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Physics.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Collections">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Entities.Hybrid">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -318,6 +330,15 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.burst@1.3.0-preview.12/Unity.Burst.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.CompilerServices.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.collections@0.9.0-preview.6/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0-preview/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

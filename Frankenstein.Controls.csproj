@@ -50,43 +50,75 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Frankenstein-Controls\Sprites\Controller\SpriteClickableController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Controller\SaveGamePatcherController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\PlatformSources\SaveGameSourceFile.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Entities\IGameProgressLoader.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Entities\ICoroutine.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Entities\IQueryable.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\JoyStickController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Entities\ICameraSize.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Platform\SaveGameProviderAndroid.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Controller\SaveGameSerializer.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Controller\SaveGameSourceProvider.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Components\EventBubble.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Model\TouchInputDevice.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Controller\CameraSizeController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IClickable.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IMeshClickable.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\View\CameraView.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Controller\MainCameraController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\PlatformSources\SaveGameSourcePlayerPrefs.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\QuerySearch.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Platform\SaveGameProviderIOS.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Sprites\View\SpriteClickableView.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Controller\SaveGameController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Entities\ISaveGamePatcher.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IGestureInput.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\View\ClickableView.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\ITouch3DRay.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\MeshClickableController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Systems\Touch3DRaySystem.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Entities\ISaveGame.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Entities\IMainCamera.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Sprites\Entities\ISpriteClickable.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\View\FingerScriptClient.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\SaveGameWriterController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\TouchRay2DController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Models\GameCamera.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Camera\Systems\CameraMovementSystem.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\View\MeshClickableView.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\ITouch2DRay.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\QueryController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Camera\Components\ICameraMovement.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\FingerScriptController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\View\CoroutineView.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Systems\EventBubblerSystem.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Entities\ICamera.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\SceneController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Framework\Components\DoNotDelete.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Platform\SaveGameProviderEditor.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Systems\JoyStickSystem.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Entities\ISaveGameWriter.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Entities\ISaveGameProvider.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\GameProgressLoaderController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Platform\PlayerPrefsController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IMoveByPan.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\View\JoyStickView.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\View\CameraSizeView.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Controller\CoroutineController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\GestureInputController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Camera\Controller\CameraController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IJoyStick.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Controller\SaveGameProvider.cs" />
      <Compile Include="Assets\Frankenstein-Controls\FrankensteinControlsBoot.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Components\OnClickEvent.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\Entities\ISaveGameSourceProvider.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\MoveByPanController.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Components\IJoyStickData.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Controller\TouchRay3DController.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\SaveGame\PlatformSources\SaveGameBackUp.cs" />
+     <Compile Include="Assets\Frankenstein-Controls\Input\Entities\IFingerScript.cs" />
      <Compile Include="Assets\Frankenstein-Controls\Framework\Entities\IScene.cs" />
      <None Include="Assets\Frankenstein-Controls\Frankenstein.Controls.asmdef" />
  <Reference Include="Unity.Addressables">
@@ -94,6 +126,27 @@
  </Reference>
  <Reference Include="Unity.ResourceManager">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Transforms">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Transforms.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Entities">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Physics">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Physics.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Collections">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Entities.Hybrid">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Mathematics">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -304,6 +357,15 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.burst@1.3.0-preview.12/Unity.Burst.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.CompilerServices.Unsafe">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.collections@0.9.0-preview.6/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/GameProjects/Frankenstein-Design/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0-preview/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -658,6 +720,14 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="FingersLite.csproj">
+      <Project>{a06e6e1a-fb50-7176-15de-2a5370a93af1}</Project>
+      <Name>FingersLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="JoystickPack.csproj">
+      <Project>{4465b4a4-671c-7017-a75a-e9838d84e443}</Project>
+      <Name>JoystickPack</Name>
+    </ProjectReference>
     <ProjectReference Include="Frankenstein.csproj">
       <Project>{3622ea7e-09f8-c1aa-e6a1-15082f8ca20b}</Project>
       <Name>Frankenstein</Name>

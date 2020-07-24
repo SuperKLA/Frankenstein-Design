@@ -44,6 +44,26 @@ namespace Frankenstein.Controls
             container.Register<ISaveGameSourceProviderService>(() => new SaveGameSourceProvider());
 
             #endregion
+
+
+            #region Input
+
+            container.Register<IFingerScriptService>(() => new FingerScriptController()).AsSingleton();
+            container.Register<IGestureInputService>(() => new GestureInputController());
+            container.Register<ITouch2DRayService>(() => new TouchRay2DController());
+            container.Register<ITouch3DRayService>(() => new TouchRay3DController());
+            container.Register<IJoyStickService>(() => new JoyStickController());
+            container.Register<IMoveByPanService>(() => new MoveByPanController());
+            container.Register<IMeshClickableService>(() => new MeshClickableController());
+
+            #endregion
+
+
+            #region Sprites
+
+            container.Register<ISpriteClickableService>(() => new SpriteClickableController());
+
+            #endregion
         }
     }
 }

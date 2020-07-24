@@ -4,6 +4,7 @@
 		"Unity.Addressables",
 		"Unity.ResourceManager",
 		"Frankenstein",
+		"Frankenstein.DTO",
 		"Frankenstein.Controls",
 		"ExampleGame.DTO"
 	],

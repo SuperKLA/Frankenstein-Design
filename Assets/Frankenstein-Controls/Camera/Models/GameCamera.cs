@@ -1,26 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Frankenstein;
 using Frankenstein.Controls.Entities;
+using Unity.Entities;
 using UnityEngine;
 
 namespace Frankenstein.Controls.Camera.Models
 {
-    public class GameCamera : APIModel, ICamera, IMainCamera, IQueryable, ICameraSize
+    public class GameCamera : APIModel, ICamera, IMainCamera, ITouch2DRay, IGestureInput, IQueryable, ICameraSize
     {
         #region Interface Accessors
 
-        public ICamera     ICamera     => this;
-        public IMainCamera IMainCamera => this;
-        public IQueryable  IQueryable  => this;
+        public ICamera       ICamera       => this;
+        public IMainCamera   IMainCamera   => this;
+        public ITouch2DRay   ITouch2DRay   => this;
+        public IGestureInput IGestureInput => this;
+        public IQueryable    IQueryable    => this;
         public ICameraSize ICameraSize => this;
 
         #endregion
 
 
+
         #region Locals
 
-        
+        public Entity CameraEntity { get; set; }
 
         #endregion
 
@@ -29,21 +34,25 @@ namespace Frankenstein.Controls.Camera.Models
 
         public GameCamera()
         {
+            
         }
 
         public override async Task Boot(params object[] any)
         {
-            this.IQueryable.Service = await this.SetupServices<IQueryableService>();
-
-            this.IMainCamera.Service = await this.SetupServices<IMainCameraService>();
+            this.IQueryable.Service    = await this.SetupServices<IQueryableService>();
+            
+            this.IMainCamera.Service   = await this.SetupServices<IMainCameraService>();
+            this.IGestureInput.Service = await this.SetupServices<IGestureInputService>();
+            this.ITouch2DRay.Service   = await this.SetupServices<ITouch2DRayService>();
             this.ICameraSize.Service = await this.SetupServices<ICameraSizeService>();
-
+            
             this.ICamera.Service = await this.SetupServices<ICameraService>();
 
+            this.ITouch2DRay.Service.Bind();
             this.IMainCamera.Service.AddMainCamera(this.ICamera.Service);
             this.ICamera.Service.SetOrthoSize(this.ICameraSize.Service.GetOrthSize());
         }
-
+        
         #endregion
 
 
@@ -65,11 +74,29 @@ namespace Frankenstein.Controls.Camera.Models
         #endregion
 
 
+        #region ITouch2DRay
+
+        ITouch2DRayService IAPIEntity<ITouch2DRayService>.Service { get; set; }
+
+        ICameraService ITouch2DRay.CameraService => this.ICamera.Service;
+
+        IGestureInputService ITouch2DRay.InputService => this.IGestureInput.Service;
+
+        #endregion
+
+
+        #region IGestureInput
+
+        IGestureInputService IAPIEntity<IGestureInputService>.Service { get; set; }
+
+        #endregion
+
+
         #region IQueryable
 
         IQueryableService IAPIEntity<IQueryableService>.Service { get; set; }
 
-        List<Guid> IQueryable.Layers => new List<Guid>() { };
+        List<Guid> IQueryable.Layers => new List<Guid>() {};
 
         bool IQueryable.Matches<TQuery>()
         {
