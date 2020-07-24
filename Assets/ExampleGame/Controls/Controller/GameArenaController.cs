@@ -16,9 +16,9 @@ namespace ExampleGame.Controller
         {
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
-            await base.CreateView();
+             base.CreateView();
             var view = this.Owner.SceneService.GetView<GameArenaView>();
             view.Setup(this);
 

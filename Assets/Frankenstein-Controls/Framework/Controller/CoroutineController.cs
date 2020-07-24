@@ -17,7 +17,7 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
             var go   = this.Owner.AnyGameObject;
             var view = go.GetComponent<CoroutineView>();
@@ -31,9 +31,9 @@ namespace Frankenstein.Controls.Controller
             _view = view;
         }
 
-        protected override async Task OnEntityDestroy(ICoroutine entity)
+        protected override  void OnEntityDestroy(ICoroutine entity)
         {
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
             this.ICoroutineService.ClearAllJobs();
             MonoBehaviour.Destroy(this._view.gameObject);
             this._view = null;

@@ -18,12 +18,4 @@ public static class AwaitExtensions
 
         return tcs.Task.GetAwaiter();
     }
-
-    // Any time you call an async method from sync code, you can either use this wrapper
-    // method or you can define your own `async void` method that performs the await
-    // on the given Task
-    public static async void WrapErrors(this Task task)
-    {
-        await task;
-    }
 }

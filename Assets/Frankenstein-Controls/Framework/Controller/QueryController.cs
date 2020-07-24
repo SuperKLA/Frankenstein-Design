@@ -49,7 +49,7 @@ namespace Frankenstein.Controls.Controller
             return last;
         }
 
-        protected override async Task OnEntityDestroy(IQueryable query)
+        protected override  void OnEntityDestroy(IQueryable query)
         {
             var context = this._Setup();
             var layers  = query.Layers;

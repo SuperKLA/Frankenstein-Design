@@ -18,9 +18,9 @@ namespace Frankenstein.Controls
         
         #region APIModel
         
-        public override async Task Boot(params object[] any)
+        public override  void Boot(params object[] any)
         {
-            this.IFingerScript.Service = await this.SetupServices<IFingerScriptService>();
+            this.IFingerScript.Service =  this.SetupServices<IFingerScriptService>();
         }
         
         #endregion

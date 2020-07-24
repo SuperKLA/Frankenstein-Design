@@ -20,9 +20,9 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
-            var asset = await Addressables.InstantiateAsync("FingerScriptClient").Task;
+            var asset =  SyncAddressables.Instantiate("FingerScriptClient");
             var view = asset.GetComponent<FingerScriptClient>();
             view.Setup(this);
 

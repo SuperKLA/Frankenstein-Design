@@ -23,9 +23,9 @@ namespace Frankenstein.Controls.Controller
             this.CreateScaleGesture();
         }
 
-        protected override async Task OnEntityDestroy(IGestureInput entity)
+        protected override  void OnEntityDestroy(IGestureInput entity)
         {
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
             
             if(this.tapGesture != null)
                 FingersScript.Instance.RemoveGesture(this.tapGesture);

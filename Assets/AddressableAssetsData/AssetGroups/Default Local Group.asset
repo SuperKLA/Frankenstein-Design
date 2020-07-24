@@ -20,11 +20,10 @@ MonoBehaviour:
   - m_GUID: 806627e07f1b57f48a27136d113e69d2
     m_Address: ExampleCharacter1
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 81ca9a2c2ee6d7d41b32a85f46b845f5
-    m_Address: ExampleGame1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9373ea87d39e0349b5f40955d7e9ad1, type: 2}
   m_SchemaSet:

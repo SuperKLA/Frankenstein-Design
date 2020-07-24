@@ -22,7 +22,7 @@ namespace Frankenstein.Controls.Controller
         {
         }
 
-        public override async Task CreateView()
+        public override async void CreateView()
         {
             CameraView view = null;
 
@@ -67,9 +67,9 @@ namespace Frankenstein.Controls.Controller
             this.Owner.CameraEntity = cameraEntity;
         }
 
-        protected override async Task OnEntityDestroy(ICamera entity)
+        protected override void OnEntityDestroy(ICamera entity)
         {
-            await base.OnEntityDestroy(entity);
+            base.OnEntityDestroy(entity);
             World.DefaultGameObjectInjectionWorld.EntityManager.DestroyEntity(this.Owner.CameraEntity);
             this._view = null;
         }

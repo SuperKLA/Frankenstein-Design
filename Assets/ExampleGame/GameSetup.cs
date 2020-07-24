@@ -10,7 +10,7 @@ namespace ExampleGame
     public class GameSetup : APISetup, IGameDTO
     {
         public Camera EditorCamera;
-        
+
         public GameConfigDTO _gameConfig;
 
         public GameConfigDTO GameConfig
@@ -20,19 +20,19 @@ namespace ExampleGame
         }
 
 
-        async void Start()
+        void Start()
         {
             try
             {
                 this.Setup();
-            
+
                 if (this.EditorCamera != null) this.EditorCamera.gameObject.SetActive(false);
-            
-                await Addressables.InitializeAsync();
+
+                Addressables.InitializeAsync();
 
                 this.BootEntities();
-            
-                await new GameArena().Boot();
+
+                new GameArena().Boot();
             }
             catch (Exception e)
             {
@@ -43,9 +43,9 @@ namespace ExampleGame
         void BootEntities()
         {
             this.context.IoC.Register<IGameDTO>(() => this);
-            
-            FrankensteinControlsBoot.Create().Boot(this.context.IoC);//Frankenstein Boot
-            GameBoot.Create().Boot(this.context.IoC);//your own game boot
+
+            FrankensteinControlsBoot.Create().Boot(this.context.IoC); //Frankenstein Boot
+            GameBoot.Create().Boot(this.context.IoC);                 //your own game boot
         }
     }
 }

@@ -22,33 +22,35 @@ namespace ExampleGame
         #region Locals
 
         public ISceneService SceneService => this.IScene.Service;
-        
+
         #endregion
 
 
         #region APIModel
 
-        public override async Task Boot(params object[] any)
+        public override void Boot(params object[] any)
         {
-            this.IQueryable.Service = await this.SetupServices<IQueryableService>();
-            this.IScene.Service     = await this.SetupServices<ISceneService>();
+            this.IQueryable.Service = this.SetupServices<IQueryableService>();
+            this.IScene.Service     = this.SetupServices<ISceneService>();
 
-            await this.IScene.Service.LoadScene("ExampleGame1");
-            this.IScene.Service.SetAsMain();
+            this.IScene.Service.LoadScene("ExampleGame1", () =>
+            {
+                this.IScene.Service.SetAsMain();
 
-            this.IGameArena.Service    = await this.SetupServices<IGameArenaService>();
-            this.IGameArenaGUI.Service = await this.SetupServices<IGameArenaGUIService>();
+                this.IGameArena.Service    = this.SetupServices<IGameArenaService>();
+                this.IGameArenaGUI.Service = this.SetupServices<IGameArenaGUIService>();
 
-            await new Character().Boot();
+                new Character().Boot();
+            });
         }
 
-        public override async Task Destroy()
+        public override void Destroy()
         {
-            await this.DestroyServices(this.IQueryable.Service);
-            await this.DestroyServices(this.IGameArena.Service);
-            await this.DestroyServices(this.IGameArenaGUI.Service);
-            await this.DestroyServices(this.IScene.Service);
-            await base.Destroy();
+            this.DestroyServices(this.IQueryable.Service);
+            this.DestroyServices(this.IGameArena.Service);
+            this.DestroyServices(this.IGameArenaGUI.Service);
+            this.DestroyServices(this.IScene.Service);
+            base.Destroy();
         }
 
         #endregion
@@ -102,7 +104,7 @@ namespace ExampleGame
         IGameArenaGUIService IAPIEntity<IGameArenaGUIService, IGameArenaGUIView>.Service { get; set; }
 
         IGameArenaGUIView IAPIEntity<IGameArenaGUIService, IGameArenaGUIView>.View { get; set; }
-        
+
         #endregion
     }
 }

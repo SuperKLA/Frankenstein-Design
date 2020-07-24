@@ -19,7 +19,7 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
             var clickables = this.Owner.Container;
             this._view = new List<IMeshClickableView>();

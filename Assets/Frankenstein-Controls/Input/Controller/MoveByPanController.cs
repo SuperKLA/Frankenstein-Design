@@ -17,10 +17,10 @@ namespace Frankenstein.Controls.Controller
         {
         }
 
-        protected override async Task OnEntityDestroy(IMoveByPan entity)
+        protected override  void OnEntityDestroy(IMoveByPan entity)
         {
             this.IMoveByTapService.Unbind();
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
         }
 
         private void OnPanGesture(Vector2 delta)

@@ -99,6 +99,7 @@
      <Compile Include="Assets\Frankenstein\APIComponentSystem.cs" />
      <Compile Include="Assets\Frankenstein\Utils\FPSDisplay.cs" />
      <Compile Include="Assets\Frankenstein\Utils\Container.cs" />
+     <Compile Include="Assets\Frankenstein\SyncAddressables\SyncAddressablesData.cs" />
      <None Include="Assets\Frankenstein\Frankenstein.asmdef" />
  <Reference Include="Unity.Addressables">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>

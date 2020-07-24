@@ -18,9 +18,9 @@ namespace ExampleGame.Controller
         {
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
-            var asset = await Addressables.InstantiateAsync("ExampleCharacter1").Task;
+            var asset =  SyncAddressables.Instantiate("ExampleCharacter1");
             var view  = asset.GetComponent<CharacterFigureView>();
             view.Setup(this);
 

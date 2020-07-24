@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ca27153aa0448ea14bc0bef83641f7, type: 3}
+  m_Name: SnycData
+  m_EditorClassIdentifier: 
+  LabelReference:
+    m_LabelString: default
+  Items:
+  - Key: Boot
+    ObjectData: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+  - Key: ExampleGame1
+    ObjectData: {fileID: 102900000, guid: 81ca9a2c2ee6d7d41b32a85f46b845f5, type: 3}
+  - Key: LineBreaking Following Characters
+    ObjectData: {fileID: 4900000, guid: fade42e8bc714b018fac513c043d323b, type: 3}
+  - Key: LineBreaking Leading Characters
+    ObjectData: {fileID: 4900000, guid: d82c1b31c7e74239bff1220585707d2b, type: 3}
+  - Key: TMP Settings
+    ObjectData: {fileID: 11400000, guid: 3f5b5dff67a942289a9defa416b206f3, type: 2}
+  - Key: Fonts & Materials/LiberationSans SDF - Drop Shadow
+    ObjectData: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  - Key: Fonts & Materials/LiberationSans SDF - Fallback
+    ObjectData: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  - Key: Fonts & Materials/LiberationSans SDF - Outline
+    ObjectData: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  - Key: Fonts & Materials/LiberationSans SDF
+    ObjectData: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - Key: Shaders/TMPro
+    ObjectData: {fileID: 10900000, guid: 407bc68d299748449bbf7f48ee690f8d, type: 3}
+  - Key: Shaders/TMPro_Properties
+    ObjectData: {fileID: 10900000, guid: 3997e2241185407d80309a82f9148466, type: 3}
+  - Key: Shaders/TMPro_Surface
+    ObjectData: {fileID: 10900000, guid: d930090c0cd643c7b55f19a38538c162, type: 3}
+  - Key: Shaders/TMP_Bitmap-Custom-Atlas
+    ObjectData: {fileID: 4800000, guid: 48bb5f55d8670e349b6e614913f9d910, type: 3}
+  - Key: Shaders/TMP_Bitmap-Mobile
+    ObjectData: {fileID: 4800000, guid: 1e3b057af24249748ff873be7fafee47, type: 3}
+  - Key: Shaders/TMP_Bitmap
+    ObjectData: {fileID: 4800000, guid: 128e987d567d4e2c824d754223b3f3b0, type: 3}
+  - Key: Shaders/TMP_SDF Overlay
+    ObjectData: {fileID: 4800000, guid: dd89cf5b9246416f84610a006f916af7, type: 3}
+  - Key: Shaders/TMP_SDF-Mobile Masking
+    ObjectData: {fileID: 4800000, guid: bc1ede39bf3643ee8e493720e4259791, type: 3}
+  - Key: Shaders/TMP_SDF-Mobile Overlay
+    ObjectData: {fileID: 4800000, guid: a02a7d8c237544f1962732b55a9aebf1, type: 3}
+  - Key: Shaders/TMP_SDF-Mobile
+    ObjectData: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  - Key: Shaders/TMP_SDF-Surface-Mobile
+    ObjectData: {fileID: 4800000, guid: 85187c2149c549c5b33f0cdb02836b17, type: 3}
+  - Key: Shaders/TMP_SDF-Surface
+    ObjectData: {fileID: 4800000, guid: f7ada0af4f174f0694ca6a487b8f543d, type: 3}
+  - Key: Shaders/TMP_SDF
+    ObjectData: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  - Key: Shaders/TMP_Sprite
+    ObjectData: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  - Key: Sprite Assets/EmojiOne
+    ObjectData: {fileID: 11400000, guid: c41005c129ba4d66911b75229fd70b45, type: 2}
+  - Key: Style Sheets/Default Style Sheet
+    ObjectData: {fileID: 11400000, guid: f952c082cb03451daed3ee968ac6c63e, type: 2}
+  - Key: ExampleCharacter1
+    ObjectData: {fileID: 950509908311417437, guid: 806627e07f1b57f48a27136d113e69d2,
+      type: 3}

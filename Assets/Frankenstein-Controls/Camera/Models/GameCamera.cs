@@ -37,16 +37,16 @@ namespace Frankenstein.Controls.Camera.Models
             
         }
 
-        public override async Task Boot(params object[] any)
+        public override  void Boot(params object[] any)
         {
-            this.IQueryable.Service    = await this.SetupServices<IQueryableService>();
+            this.IQueryable.Service    =  this.SetupServices<IQueryableService>();
             
-            this.IMainCamera.Service   = await this.SetupServices<IMainCameraService>();
-            this.IGestureInput.Service = await this.SetupServices<IGestureInputService>();
-            this.ITouch2DRay.Service   = await this.SetupServices<ITouch2DRayService>();
-            this.ICameraSize.Service = await this.SetupServices<ICameraSizeService>();
+            this.IMainCamera.Service   =  this.SetupServices<IMainCameraService>();
+            this.IGestureInput.Service =  this.SetupServices<IGestureInputService>();
+            this.ITouch2DRay.Service   =  this.SetupServices<ITouch2DRayService>();
+            this.ICameraSize.Service =  this.SetupServices<ICameraSizeService>();
             
-            this.ICamera.Service = await this.SetupServices<ICameraService>();
+            this.ICamera.Service =  this.SetupServices<ICameraService>();
 
             this.ITouch2DRay.Service.Bind();
             this.IMainCamera.Service.AddMainCamera(this.ICamera.Service);

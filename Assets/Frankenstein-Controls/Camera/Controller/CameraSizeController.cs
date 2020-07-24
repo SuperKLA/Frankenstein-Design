@@ -15,9 +15,9 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
-            var asset = await Addressables.InstantiateAsync("CameraSizeView").Task;
+            var asset =  SyncAddressables.Instantiate("CameraSizeView");
             var view = asset.GetComponent<CameraSizeView>();
                 
             view.Setup(this);

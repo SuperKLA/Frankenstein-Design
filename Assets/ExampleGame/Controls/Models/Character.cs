@@ -29,21 +29,21 @@ namespace ExampleGame
 
         #region APIModel
 
-        public override async Task Boot(params object[] any)
+        public override  void Boot(params object[] any)
         {
-            this.IQueryable.Service               = await this.SetupServices<IQueryableService>();
-            this.IGameData.Service                = await this.SetupServices<IGameDataService>();
-            this.ICharacterFigure.Service         = await this.SetupServices<ICharacterFigureService>();
-            this.ICharacterFigureMovement.Service = await this.SetupServices<ICharacterFigureMovementService>();
+            this.IQueryable.Service               =  this.SetupServices<IQueryableService>();
+            this.IGameData.Service                =  this.SetupServices<IGameDataService>();
+            this.ICharacterFigure.Service         =  this.SetupServices<ICharacterFigureService>();
+            this.ICharacterFigureMovement.Service =  this.SetupServices<ICharacterFigureMovementService>();
         }
 
-        public override async Task Destroy()
+        public override  void Destroy()
         {
-            await this.DestroyServices(this.IQueryable.Service);
-            await this.DestroyServices(this.IGameData.Service);
-            await this.DestroyServices(this.ICharacterFigure.Service);
-            await this.DestroyServices(this.ICharacterFigureMovement.Service);
-            await base.Destroy();
+             this.DestroyServices(this.IQueryable.Service);
+             this.DestroyServices(this.IGameData.Service);
+             this.DestroyServices(this.ICharacterFigure.Service);
+             this.DestroyServices(this.ICharacterFigureMovement.Service);
+             base.Destroy();
         }
 
         #endregion

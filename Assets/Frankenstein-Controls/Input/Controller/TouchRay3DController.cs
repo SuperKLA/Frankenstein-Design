@@ -19,10 +19,10 @@ namespace Frankenstein.Controls.Controller
 
         #region IAPIDataController
 
-        protected override async Task OnEntityDestroy(ITouch3DRay entity)
+        protected override  void OnEntityDestroy(ITouch3DRay entity)
         {
             this.ITouch3DRayService.Unbind();
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
         }
 
         private void OnTapGesture(Vector2 point)

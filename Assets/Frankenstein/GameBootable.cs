@@ -12,14 +12,12 @@ namespace Frankenstein
         {
         }
 
-        public virtual async Task BootGame()
+        public virtual void BootGame()
         {
-
         }
 
         public virtual void Setup()
         {
-
         }
     }
 }

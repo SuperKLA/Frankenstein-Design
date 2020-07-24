@@ -50,6 +50,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Frankenstein-CloudBuild\Editor\SyncAddressables\SyncAddressablesEditor.cs" />
      <Compile Include="Assets\Frankenstein-CloudBuild\Editor\SerializableDatetimeInspector.cs" />
      <Compile Include="Assets\Frankenstein-CloudBuild\Editor\InkscapeCloneCreator.cs" />
      <Compile Include="Assets\Frankenstein-CloudBuild\Editor\EasyButtonDrawer.cs" />

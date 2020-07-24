@@ -14,14 +14,14 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
 
         }
 
-        protected override async Task OnEntityDestroy(ISaveGameWriter entity)
+        protected override  void OnEntityDestroy(ISaveGameWriter entity)
         {
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
         }
     }
 }

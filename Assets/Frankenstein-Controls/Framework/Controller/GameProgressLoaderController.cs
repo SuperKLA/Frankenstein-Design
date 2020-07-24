@@ -19,7 +19,7 @@ namespace Frankenstein.Controls.Controller
             this._Bind(entity);
         }
 
-        protected override async Task OnEntityDestroy(IGameProgressLoader entity)
+        protected override  void OnEntityDestroy(IGameProgressLoader entity)
         {
             this._Unbind(entity);
         }

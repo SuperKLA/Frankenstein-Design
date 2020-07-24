@@ -566,7 +566,7 @@ namespace DigitalRubyShared
 
 #if PCL || PORTABLE || HAS_TASKS
 
-        async
+        
 
 #endif
 
@@ -579,7 +579,7 @@ namespace DigitalRubyShared
 
 #if PCL || PORTABLE || HAS_TASKS
 
-            await System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(seconds));
+             System.Threading.Tasks.Task.Delay(TimeSpan.FromSeconds(seconds));
 
             action();
 

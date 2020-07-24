@@ -16,7 +16,7 @@ namespace ExampleGame.Controller
         {
         }
 
-        public override async Task CreateView()
+        public override void CreateView()
         {
             var go   = new GameObject("MovementInputView");
             var view = go.AddComponent<MovementInputView>();
@@ -25,9 +25,9 @@ namespace ExampleGame.Controller
             this._view = view;
         }
 
-        protected override async Task OnEntityDestroy(ICharacterFigureMovement entity)
+        protected override void OnEntityDestroy(ICharacterFigureMovement entity)
         {
-            await base.OnEntityDestroy(entity);
+            base.OnEntityDestroy(entity);
         }
 
         #endregion

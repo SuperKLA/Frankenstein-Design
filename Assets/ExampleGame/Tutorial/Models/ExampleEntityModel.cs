@@ -28,10 +28,10 @@ namespace ExampleGame
 
         #region APIModel
 
-        public override async Task Boot(params object[] any)
+        public override  void Boot(params object[] any)
         {
-            this.IExampleEntity.Service = await this.SetupServices<IExampleEntityService>();
-            this.IGameData.Service      = await this.SetupServices<IGameDataService>();
+            this.IExampleEntity.Service =  this.SetupServices<IExampleEntityService>();
+            this.IGameData.Service      =  this.SetupServices<IGameDataService>();
         }
         
         #endregion

@@ -21,7 +21,7 @@ namespace Frankenstein.Controls.Controller
             
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
             JoyStickView view;
             
@@ -32,7 +32,7 @@ namespace Frankenstein.Controls.Controller
             }
             else
             {
-                var viewGo = await Addressables.InstantiateAsync("JoyStickView");
+                var viewGo =  SyncAddressables.Instantiate("JoyStickView");
                 view = viewGo.GetComponent<JoyStickView>();
                 this._needsViewKill = true;
             }
@@ -42,9 +42,9 @@ namespace Frankenstein.Controls.Controller
             this._view = view;
         }
 
-        protected override async Task OnEntityDestroy(IJoyStick entity)
+        protected override  void OnEntityDestroy(IJoyStick entity)
         {
-            await base.OnEntityDestroy(entity);
+             base.OnEntityDestroy(entity);
             if (this._needsViewKill)
             {
                 Object.Destroy(this._view);

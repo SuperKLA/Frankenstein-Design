@@ -5,9 +5,9 @@ namespace Frankenstein
     public interface IAPIController
     {
         void OnCreating(IAPIModel model);
-        Task CreateView();
+        void CreateView();
         void OnControllerReady(IAPIModel model);
-        Task OnDestroy(IAPIModel model);
+        void OnDestroy(IAPIModel model);
     }
     
     public abstract class APIController<T_Entity> : IAPIController
@@ -26,14 +26,14 @@ namespace Frankenstein
             this.OnEntityCreated(entity);
         }
 
-        public virtual async Task CreateView()
+        public virtual  void CreateView()
         {
             
         }
         
-        public async Task OnDestroy(IAPIModel model)
+        public  void OnDestroy(IAPIModel model)
         {
-            await this.OnEntityDestroy((T_Entity)model);
+             this.OnEntityDestroy((T_Entity)model);
             this.Owner = default(T_Entity);
         }
 
@@ -49,7 +49,7 @@ namespace Frankenstein
 
         protected abstract void OnEntityCreated(T_Entity entity);
 
-        protected virtual async Task OnEntityDestroy(T_Entity entity)
+        protected virtual  void OnEntityDestroy(T_Entity entity)
         {
             
         }

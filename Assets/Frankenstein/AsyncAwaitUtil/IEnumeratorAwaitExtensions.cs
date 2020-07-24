@@ -57,13 +57,13 @@ public static class IEnumeratorAwaitExtensions
 
     public static SimpleCoroutineAwaiter<UnityEngine.Object> GetAwaiter(this ResourceRequest instruction)
     {
-        var awaiter = new SimpleCoroutineAwaiter<UnityEngine.Object>();
+        var er = new SimpleCoroutineAwaiter<UnityEngine.Object>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            InstructionWrappers.ResourceRequest(awaiter, instruction)));
-        return awaiter;
+            InstructionWrappers.ResourceRequest(er, instruction)));
+        return er;
     }
 
-    // Return itself so you can do things like (await new WWW(url)).bytes
+    // Return itself so you can do things like ( new WWW(url)).bytes
     public static SimpleCoroutineAwaiter<WWW> GetAwaiter(this WWW instruction)
     {
         return GetAwaiterReturnSelf(instruction);
@@ -71,50 +71,50 @@ public static class IEnumeratorAwaitExtensions
 
     public static SimpleCoroutineAwaiter<AssetBundle> GetAwaiter(this AssetBundleCreateRequest instruction)
     {
-        var awaiter = new SimpleCoroutineAwaiter<AssetBundle>();
+        var er = new SimpleCoroutineAwaiter<AssetBundle>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            InstructionWrappers.AssetBundleCreateRequest(awaiter, instruction)));
-        return awaiter;
+            InstructionWrappers.AssetBundleCreateRequest(er, instruction)));
+        return er;
     }
 
     public static SimpleCoroutineAwaiter<UnityEngine.Object> GetAwaiter(this AssetBundleRequest instruction)
     {
-        var awaiter = new SimpleCoroutineAwaiter<UnityEngine.Object>();
+        var er = new SimpleCoroutineAwaiter<UnityEngine.Object>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            InstructionWrappers.AssetBundleRequest(awaiter, instruction)));
-        return awaiter;
+            InstructionWrappers.AssetBundleRequest(er, instruction)));
+        return er;
     }
 
     public static SimpleCoroutineAwaiter<T> GetAwaiter<T>(this IEnumerator<T> coroutine)
     {
-        var awaiter = new SimpleCoroutineAwaiter<T>();
+        var er = new SimpleCoroutineAwaiter<T>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            new CoroutineWrapper<T>(coroutine, awaiter).Run()));
-        return awaiter;
+            new CoroutineWrapper<T>(coroutine, er).Run()));
+        return er;
     }
 
     public static SimpleCoroutineAwaiter<object> GetAwaiter(this IEnumerator coroutine)
     {
-        var awaiter = new SimpleCoroutineAwaiter<object>();
+        var er = new SimpleCoroutineAwaiter<object>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            new CoroutineWrapper<object>(coroutine, awaiter).Run()));
-        return awaiter;
+            new CoroutineWrapper<object>(coroutine, er).Run()));
+        return er;
     }
 
     static SimpleCoroutineAwaiter GetAwaiterReturnVoid(object instruction)
     {
-        var awaiter = new SimpleCoroutineAwaiter();
+        var er = new SimpleCoroutineAwaiter();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            InstructionWrappers.ReturnVoid(awaiter, instruction)));
-        return awaiter;
+            InstructionWrappers.ReturnVoid(er, instruction)));
+        return er;
     }
 
     static SimpleCoroutineAwaiter<T> GetAwaiterReturnSelf<T>(T instruction)
     {
-        var awaiter = new SimpleCoroutineAwaiter<T>();
+        var er = new SimpleCoroutineAwaiter<T>();
         RunOnUnityScheduler(() => AsyncCoroutineRunner.Instance.StartCoroutine(
-            InstructionWrappers.ReturnSelf(awaiter, instruction)));
-        return awaiter;
+            InstructionWrappers.ReturnSelf(er, instruction)));
+        return er;
     }
 
     static void RunOnUnityScheduler(Action action)
@@ -169,7 +169,7 @@ public static class IEnumeratorAwaitExtensions
             _exception = e;
             _result = result;
 
-            // Always trigger the continuation on the unity thread when awaiting on unity yield
+            // Always trigger the continuation on the unity thread when ing on unity yield
             // instructions
             if (_continuation != null)
             {
@@ -214,7 +214,7 @@ public static class IEnumeratorAwaitExtensions
             _isDone = true;
             _exception = e;
 
-            // Always trigger the continuation on the unity thread when awaiting on unity yield
+            // Always trigger the continuation on the unity thread when ing on unity yield
             // instructions
             if (_continuation != null)
             {
@@ -233,15 +233,15 @@ public static class IEnumeratorAwaitExtensions
 
     class CoroutineWrapper<T>
     {
-        readonly SimpleCoroutineAwaiter<T> _awaiter;
+        readonly SimpleCoroutineAwaiter<T> _er;
         readonly Stack<IEnumerator> _processStack;
 
         public CoroutineWrapper(
-            IEnumerator coroutine, SimpleCoroutineAwaiter<T> awaiter)
+            IEnumerator coroutine, SimpleCoroutineAwaiter<T> er)
         {
             _processStack = new Stack<IEnumerator>();
             _processStack.Push(coroutine);
-            _awaiter = awaiter;
+            _er = er;
         }
 
         public IEnumerator Run()
@@ -266,13 +266,13 @@ public static class IEnumeratorAwaitExtensions
 
                     if (objectTrace.Any())
                     {
-                        _awaiter.Complete(
+                        _er.Complete(
                             default(T), new Exception(
                                 GenerateObjectTraceMessage(objectTrace), e));
                     }
                     else
                     {
-                        _awaiter.Complete(default(T), e);
+                        _er.Complete(default(T), e);
                     }
 
                     yield break;
@@ -284,7 +284,7 @@ public static class IEnumeratorAwaitExtensions
 
                     if (_processStack.Count == 0)
                     {
-                        _awaiter.Complete((T)topWorker.Current, null);
+                        _er.Complete((T)topWorker.Current, null);
                         yield break;
                     }
                 }
@@ -361,39 +361,39 @@ public static class IEnumeratorAwaitExtensions
     static class InstructionWrappers
     {
         public static IEnumerator ReturnVoid(
-            SimpleCoroutineAwaiter awaiter, object instruction)
+            SimpleCoroutineAwaiter er, object instruction)
         {
             // For simple instructions we assume that they don't throw exceptions
             yield return instruction;
-            awaiter.Complete(null);
+            er.Complete(null);
         }
 
         public static IEnumerator AssetBundleCreateRequest(
-            SimpleCoroutineAwaiter<AssetBundle> awaiter, AssetBundleCreateRequest instruction)
+            SimpleCoroutineAwaiter<AssetBundle> er, AssetBundleCreateRequest instruction)
         {
             yield return instruction;
-            awaiter.Complete(instruction.assetBundle, null);
+            er.Complete(instruction.assetBundle, null);
         }
 
         public static IEnumerator ReturnSelf<T>(
-            SimpleCoroutineAwaiter<T> awaiter, T instruction)
+            SimpleCoroutineAwaiter<T> er, T instruction)
         {
             yield return instruction;
-            awaiter.Complete(instruction, null);
+            er.Complete(instruction, null);
         }
 
         public static IEnumerator AssetBundleRequest(
-            SimpleCoroutineAwaiter<UnityEngine.Object> awaiter, AssetBundleRequest instruction)
+            SimpleCoroutineAwaiter<UnityEngine.Object> er, AssetBundleRequest instruction)
         {
             yield return instruction;
-            awaiter.Complete(instruction.asset, null);
+            er.Complete(instruction.asset, null);
         }
 
         public static IEnumerator ResourceRequest(
-            SimpleCoroutineAwaiter<UnityEngine.Object> awaiter, ResourceRequest instruction)
+            SimpleCoroutineAwaiter<UnityEngine.Object> er, ResourceRequest instruction)
         {
             yield return instruction;
-            awaiter.Complete(instruction.asset, null);
+            er.Complete(instruction.asset, null);
         }
     }
 }

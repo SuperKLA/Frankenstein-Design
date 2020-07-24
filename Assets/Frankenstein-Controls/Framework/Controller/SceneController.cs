@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Frankenstein.Controls.Entities;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace Frankenstein.Controls.Controller
 {
     public class SceneController : APIController<IScene>, ISceneService
     {
-        private SceneInstance        _sceneInstance;
-        private Scene _scene;
-        private GameObject[] _roots;
+        private SceneInstance _sceneInstance;
+        private Scene         _scene;
+        private GameObject[]  _roots;
 
         #region Controller
 
@@ -20,17 +21,17 @@ namespace Frankenstein.Controls.Controller
         {
         }
 
-        protected override async Task OnEntityDestroy(IScene entity)
+        protected override void OnEntityDestroy(IScene entity)
         {
-            await base.OnEntityDestroy(entity);
+            base.OnEntityDestroy(entity);
 
             if (this._sceneInstance.Scene.IsValid())
             {
-                await Addressables.UnloadSceneAsync(this._sceneInstance);
+                Addressables.UnloadSceneAsync(this._sceneInstance);
             }
             else
             {
-                var isDone = await SceneManager.UnloadSceneAsync(this._scene);
+                var isDone = SceneManager.UnloadSceneAsync(this._scene);
             }
 
             this._roots = null;
@@ -50,20 +51,24 @@ namespace Frankenstein.Controls.Controller
             this._roots = new GameObject[0];
         }
 
-        async Task ISceneService.LoadScene(string name)
+        void ISceneService.LoadScene(string name, Action loaded)
         {
             this._scene = SceneManager.GetSceneByName(name);
 
             if (!this._scene.IsValid())
             {
-                var sceneInstance = await Addressables.LoadSceneAsync(name, LoadSceneMode.Additive);
-                sceneInstance.Activate();
-                
-                this._sceneInstance = sceneInstance;
-                this._scene = sceneInstance.Scene;
+                SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive).completed+= operation =>
+                {
+                    this._scene = SceneManager.GetSceneByName(name);
+                    this._roots = this._scene.GetRootGameObjects();
+                    loaded();
+                };
             }
-            
-            this._roots = this._scene.GetRootGameObjects();
+            else
+            {
+                this._roots = this._scene.GetRootGameObjects();
+                loaded();
+            }
         }
 
         IList<T> ISceneService.GetViews<T>()
@@ -71,7 +76,7 @@ namespace Frankenstein.Controls.Controller
             var result = new List<T>();
             for (int c = 0; c < this._roots.Length; c++)
             {
-                var go = this._roots[c];
+                var go     = this._roots[c];
                 var childs = go.GetComponentsInChildren<T>(true);
                 if (result != null && childs.Length > 0)
                 {
@@ -81,7 +86,7 @@ namespace Frankenstein.Controls.Controller
 
             return result;
         }
-        
+
         T ISceneService.GetView<T>()
         {
             for (int c = 0; c < this._roots.Length; c++)

@@ -22,10 +22,10 @@ namespace ExampleGame.Controller
             //A controller has different States, use them to boot properly
         }
 
-        public override async Task CreateView()
+        public override  void CreateView()
         {
             //optional, demonstration with addressables
-            var asset = await Addressables.InstantiateAsync("Example").Task;
+            var asset = SyncAddressables.Instantiate("Example");
             var view  = asset.GetComponent<ExampleEntityView>();
             view.Setup(this);
 

@@ -1,4 +1,5 @@
-﻿﻿using System.Collections.Generic;
+﻿﻿using System;
+ using System.Collections.Generic;
  using System.Threading.Tasks;
  using UnityEngine;
 
@@ -11,7 +12,7 @@
     public interface ISceneService : IAPIEntityService
     {
         IList<T> GetViews<T>();
-        Task LoadScene(string name);
+        void LoadScene(string name, Action loaded);
         void CreateScene(string name);
         T GetView<T>();
 

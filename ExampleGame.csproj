@@ -55,12 +55,16 @@
      <Compile Include="Assets\ExampleGame\Controls\Models\GameArena.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Views\GameArenaGUIView.cs" />
      <Compile Include="Assets\ExampleGame\GameSetup.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Entities\IExampleEntity.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Views\CharacterFigureView.cs" />
      <Compile Include="Assets\ExampleGame\GameBoot.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Models\ExampleEntityModel.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Controller\GameArenaGUIController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Entities\ICharacterFigureMovement.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Models\Character.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Controller\ExampleEntityController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Controller\GameArenaController.cs" />
+     <Compile Include="Assets\ExampleGame\Tutorial\Views\ExampleEntityView.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Entities\IGameData.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Views\MovementInputView.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Views\GameArenaView.cs" />
@@ -69,10 +73,6 @@
      <Compile Include="Assets\ExampleGame\Controls\Controller\CharacterFigureController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Controller\CharacterFigureMovementController.cs" />
      <Compile Include="Assets\ExampleGame\Controls\Entities\IGameArena.cs" />
-     <Compile Include="Assets\ExampleGame\Tutorial\Entities\IExampleEntity.cs" />
-     <Compile Include="Assets\ExampleGame\Tutorial\Models\ExampleEntityModel.cs" />
-     <Compile Include="Assets\ExampleGame\Tutorial\Controller\ExampleEntityController.cs" />
-     <Compile Include="Assets\ExampleGame\Tutorial\Views\ExampleEntityView.cs" />
      <None Include="Assets\ExampleGame\ExampleGame.asmdef" />
  <Reference Include="Unity.Addressables">
  <HintPath>C:/GameProjects/Frankenstein-Design/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
