@@ -2,6 +2,7 @@
     "name": "ExampleGame.DTO",
     "references": [
         "Frankenstein",
+        "Frankenstein.DTO",
 "Unity.Addressables"
     ],
     "optionalUnityReferences": [],

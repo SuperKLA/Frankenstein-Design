@@ -1,7 +1,5 @@
-﻿using ExampleGame.DTO;
-using Frankenstein;
+﻿using Frankenstein;
 using Frankenstein.Controls.Entities;
-using Frankenstein.DTO;
 
 namespace ExampleGame.Entities
 {

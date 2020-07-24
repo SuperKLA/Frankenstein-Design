@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Frankenstein.Controls.Components;
 using Frankenstein.Controls.Entities;
 using Frankenstein.Controls.Views;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -39,31 +43,78 @@ namespace Frankenstein.Controls.Controller
 
         protected override void OnControllerFinished(ICamera entity)
         {
+            this._SetupEntity();
+        }
+
+        void _SetupEntity()
+        {
+            //var positionData = World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<CameraMovementData>(this.Owner.CameraEntity);
+            var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, APIContext.Current.MainBlob);
+            var cameraEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(this._view.gameObject, settings);
+#if UNITY_EDITOR
+            World.DefaultGameObjectInjectionWorld.EntityManager.SetName(cameraEntity, "Camera");
+#endif
+
+            var position = this._view.OwnTransform.position;
+            World.DefaultGameObjectInjectionWorld.EntityManager.AddComponentData(cameraEntity, new CameraMovementData()
+            {
+                Position = position,
+                SpawnPosition = position,
+                Offset   = this._view.OwnTransform.localPosition
+            });
+            
+            World.DefaultGameObjectInjectionWorld.EntityManager.AddComponentObject(cameraEntity, this._view);
+            this.Owner.CameraEntity = cameraEntity;
         }
 
         protected override async Task OnEntityDestroy(ICamera entity)
         {
-            MonoBehaviour.Destroy(this._view);
+            await base.OnEntityDestroy(entity);
+            World.DefaultGameObjectInjectionWorld.EntityManager.DestroyEntity(this.Owner.CameraEntity);
             this._view = null;
         }
 
         #endregion
-
+        
 
         #region ICameraService
 
+        Entity ICameraQuery.CameraEntity => this.Owner.CameraEntity;
+        //        Vector3 ICameraQuery.Position
+//        {
+//            get => this._view.OwnTransform.position;
+//            set => this._view.OwnTransform.position = value;
+//        }
+
         Vector3 ICameraQuery.Position
         {
-            get => this._view.OwnTransform.position;
-            set => this._view.OwnTransform.position = value;
+            get => World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<Translation>(this.Owner.CameraEntity).Value;
+            set
+            {
+                World.DefaultGameObjectInjectionWorld.EntityManager.SetComponentData(this.Owner.CameraEntity, new Translation()
+                {
+                    Value = value
+                });
+            }
         }
 
-        Vector3 ICameraQuery.Forward => _view.transform.forward;
+        Vector3 ICameraQuery.Forward => World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<LocalToWorld>(this.Owner.CameraEntity).Forward;
 
-        Vector3 ICameraQuery.Right => _view.transform.right;
+        Vector3 ICameraQuery.Right => _view.OwnTransform.right;
 
-        Vector3 ICameraQuery.Up => _view.transform.up;
+        Vector3 ICameraQuery.Up => _view.OwnTransform.up;
 
+        Quaternion ICameraQuery.Rotation
+        {
+            get => World.DefaultGameObjectInjectionWorld.EntityManager.GetComponentData<Rotation>(this.Owner.CameraEntity).Value;
+            set
+            {
+                World.DefaultGameObjectInjectionWorld.EntityManager.SetComponentData(this.Owner.CameraEntity, new Rotation()
+                {
+                    Value = value
+                });
+            }
+        }
 
         UnityEngine.Camera ICameraService.Cam => this._view.OwnCamera;
 

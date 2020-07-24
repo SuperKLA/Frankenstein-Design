@@ -1,0 +1,23 @@
+{
+    "name": "Frankenstein.CloudBuild",
+    "references": [
+        "Frankenstein",
+        "Frankenstein.DTO",
+        "Unity.Addressables",
+        "Unity.Addressables.Editor",
+        "Unity.ResourceManager",
+        "Unity.Entities",
+        "Unity.Entities.Hybrid"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

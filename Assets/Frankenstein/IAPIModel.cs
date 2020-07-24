@@ -10,9 +10,11 @@ namespace Frankenstein
 
     public abstract class APIModel : IAPIModel
     {
+        protected IoCContainer LocalIOC;
+
         public APIModel()
         {
-            
+            this.LocalIOC = new IoCContainer(false);
         }
 
         public abstract Task Boot(params Object[] any);
